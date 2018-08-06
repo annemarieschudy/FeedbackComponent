@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2018 by original authors @ fontello.com</metadata>
+<defs>
+<font id="feedback-icons" horiz-adv-x="1000" >
+<font-face font-family="feedback-icons" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="fullspark" unicode="&#xe800;" d="M529 494c19 0 35 10 37 23l19 215c0 22-25 39-56 39-32 0-57-17-57-39l19-215c3-13 19-23 38-23l0 0m-116-68c9 17 9 36-2 44l-177 124c-18 11-46-2-62-29-16-27-13-57 6-68l196-91c12-5 29 4 39 20l0 0m232 0c10-16 27-25 38-20l196 91c19 10 21 41 6 68-16 27-43 40-62 29l-176-124c-11-8-12-27-2-44l0 0m-116-201c19 0 35-10 37-23l19-215c0-22-25-39-56-39-32 0-57 17-57 39l19 215c3 13 19 23 38 23l0 0m116 67c10 17 27 26 38 21l196-91c19-10 21-41 6-68-16-27-43-39-62-29l-176 124c-11 8-12 27-2 43l0 0m-232 0c9-16 9-35-2-43l-177-124c-18-10-46 2-62 29-16 27-13 58 6 68l196 91c12 4 29-4 39-21l0 0" horiz-adv-x="1000" />
+
+<glyph glyph-name="send-arrow" unicode="&#xe801;" d="M500 850c-276 0-500-224-500-500s224-500 500-500 500 224 500 500-224 500-500 500z m-237-739l0 184 395 52-395 53 0 184 553-237-553-236z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>

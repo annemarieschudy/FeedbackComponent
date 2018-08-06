@@ -1,0 +1,834 @@
+body {
+  width: 100%;
+  font-family: Bogle;
+  color: #0f1c2c;
+}
+
+main {
+  width: 100%;
+  padding-top: 60px;
+}
+
+#graph {
+  height: 360px;
+  background-color: aliceblue;
+  margin: 40px 0;
+}
+
+a,
+a:link,
+a:hover,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
+h1 {
+  font-family: Bogle;
+  font-size: 38px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #0f1c2c;
+}
+
+h2 {
+  font-family: Bogle;
+  font-size: 40px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #0f1c2c;
+}
+
+h3 {
+  font-family: Bogle;
+  font-size: 19px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #0f1c2c;
+}
+
+h4 {
+  font-family: Bogle;
+  font-size: 15px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #0f1c2c;
+  margin: 22px 0 15px 0;
+}
+
+.numbers-row {
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+.numbers-row h4 {
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.numbers-row h6,
+.numbers-row i {
+  display: inline-block;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
+}
+
+.good {
+  color: #76c043;
+}
+
+.bad {
+  color: #ee3b2a;
+}
+
+.neutral {
+  color: #979797;
+}
+
+h5 {
+  font-family: Bogle;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #0f1c2c;
+}
+
+p {
+  font-family: Bogle;
+  font-size: 17px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #0f1c2c;
+}
+
+h6 {
+  font-family: Bogle;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.right {
+  text-align: right;
+}
+
+.opacity-5 {
+  opacity: 0.5;
+}
+
+#back-arrow {
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+#back-arrow i {
+  width: 23px;
+}
+#back-arrow i,
+#back-arrow p {
+  float: left;
+  display: inline-block !important;
+  margin: 0;
+  padding: 0;
+}
+
+nav.navbar {
+  height: 59px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.3);
+  width: 100%;
+  position: fixed;
+  z-index: 10000;
+}
+
+.navbar-content {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 59px;
+}
+
+nav.navbar i.icon-fullspark {
+  font-size: 38px;
+  line-height: 59px;
+  padding-left: 20px;
+  color: #fcc120;
+}
+
+nav.navbar i.material-icons {
+  float: right;
+  padding-right: 20px;
+  font-size: 32px;
+  line-height: 59px;
+}
+
+#app-drawer {
+  position: absolute;
+  z-index: 1000;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  padding-top: 60px;
+  display: none;
+}
+
+#app-drawer.open {
+  display: block;
+}
+
+#app-drawer .row {
+  width: 100%;
+  max-width: 1200px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+#app-drawer .row#back-arrow {
+  margin: 50px auto;
+}
+
+#active a {
+  font-family: Bogle;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #0477d7;
+}
+
+#dashboard {
+  width: 100%;
+  padding: 0px 20px 100px;
+  min-width: 320px !important;
+  max-width: 1500px !important;
+  margin: auto !important;
+}
+
+#dashboard-content {
+  margin: auto !important;
+  width: 75%;
+}
+
+.app-header {
+  width: 100%;
+  min-width: 320px !important;
+}
+
+.tab-row {
+  margin: 20px 0 30px 0;
+  width: 86%;
+  margin-left: 7%;
+  border-bottom: solid 1px #e6e7e8;
+}
+
+.tab-row ul {
+  width: 80%;
+  margin: auto;
+}
+
+.tab-row li {
+  display: inline-block;
+  width: 24%;
+  font-family: Bogle;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 3;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+
+.tab-row li.active-tab {
+  font-weight: bold;
+  border-bottom: solid 4px #0071ce;
+}
+
+div.dashboard .row h2,
+div.dashboard .row h4 {
+  line-height: 1;
+}
+
+div.section {
+  margin: 120px 0;
+}
+
+.dash-header {
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  top: 0;
+  padding: 45px 45px 0px 45px;
+}
+
+div.btn-row {
+  margin: 0 0 15px 0;
+  min-width: 320px;
+}
+
+button {
+  height: 36px;
+  border-radius: 20.5px;
+  border: solid 1px #979797;
+  width: 100%;
+  text-align: center;
+  color: #979797;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+button.no-border {
+  border: none;
+}
+
+button.no-border:hover {
+  border: none;
+  background-color: transparent;
+}
+
+button.button-current {
+  border: solid 2px #0477d7;
+  color: #0477d7;
+  font-weight: 600;
+}
+
+a:hover + button {
+  background-color: #0477d7;
+  border: solid 2px #0477d7;
+  font-weight: bold;
+  color: white;
+}
+
+#toggle-detail {
+  margin: 45px auto;
+}
+
+hr {
+  border-top: solid 1pt #bebebe;
+}
+
+button:hover {
+  border: solid 2px #0477d7;
+  color: #0477d7;
+}
+
+button:active {
+  background-color: #0477d7;
+  color: white;
+}
+
+button.current {
+  border: solid 2px #0477d7;
+  color: #0477d7;
+  font-weight: bold;
+}
+
+.second button.selection.selected {
+  border-color: #eb148d;
+  color: #eb148d;
+}
+
+.second button.selection:hover {
+  border-color: #eb148d;
+  color: #eb148d;
+}
+
+.second button.selection:active {
+  background-color: #eb148d;
+  color: white;
+}
+
+#halfSpark {
+  width: 80px;
+  margin-bottom: 0;
+}
+
+.app-icon {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.app-icon img {
+  border-radius: 100%;
+  height: 60px;
+  width: 60px;
+  background-color: #bebebe;
+  margin-bottom: 15px;
+}
+
+#comment-percentages {
+  max-width: 800px;
+  margin: 100px auto 0;
+}
+
+#comment-percentages h1 {
+  font-family: Bogle;
+  font-size: 40px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #0477d7;
+  opacity: 1;
+  text-align: center;
+}
+
+#comment-percentages h1.first {
+  opacity: 0.6;
+}
+
+#comment-percentages h1.third {
+  color: rgba(235, 20, 141, 0.6);
+}
+
+#comment-percentages button {
+  margin-top: 25px;
+}
+
+#comment-percentages p {
+  text-align: center;
+}
+
+button.square {
+  width: 175px;
+  height: 33px;
+  border: solid 1px #979797;
+  width: 100%;
+}
+
+button.square a {
+  color: #979797;
+}
+
+div.card.trend {
+  height: 45px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  border: none;
+  width: 80%;
+  margin: 20px 10%;
+  padding: 10px 30px;
+}
+
+div.card i {
+  vertical-align: middle;
+  width: 0;
+}
+
+div.card p {
+  font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #0f1c2c;
+  padding: 0;
+  margin: 0;
+}
+
+.material-icons.up {
+  transform: rotate(270deg);
+}
+
+.material-icons.down {
+  transform: rotate(90deg);
+}
+
+.change-over-time .arrow {
+  float: left;
+  font-size: 22px;
+  line-height: 22px;
+}
+
+.change-over-time h6 {
+  line-height: 22px;
+  font-size: 18px;
+  padding: 0;
+  float: left;
+  margin: 0;
+}
+
+.breadcrumb {
+  background-color: transparent;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.breadcrumb-item a {
+  color: #0f1c2c;
+  font-weight: 300;
+  line-height: 60px;
+}
+
+.breadcrumb-item.active {
+  color: #0f1c2c;
+  opacity: 1;
+  font-size: 34px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+#detailed-report {
+  margin: 70px 0;
+}
+
+#detailed-report hr {
+  margin-top: 72px;
+}
+
+#detailed-report .row {
+  margin: 5px 0;
+}
+
+#detailed-report h4 {
+  margin: 0;
+  line-height: 24px;
+  text-align: right;
+}
+
+div.bar {
+  background-color: #0f1c2c;
+  opacity: 0.7;
+  height: 24px;
+}
+
+#detailed-report .icons i {
+  float: right;
+  line-height: 24px;
+  font-size: 22px;
+}
+
+#search-icon {
+  position: absolute;
+  line-height: 40px;
+}
+
+.search-comments {
+  margin: 50px 0 40px 0;
+}
+
+#search-field {
+  width: 100%;
+  margin-left: 36px;
+  padding-left: 15px;
+  height: 40px;
+  border: none;
+  border-radius: 2.9px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+  display: inline;
+}
+
+.filter-comment {
+  margin: 30px 0;
+}
+
+button.filter-section.selected {
+  border: solid 2px #0477d7;
+  color: #0477d7;
+}
+
+#bar-chart {
+  height: 200px;
+  overflow: hidden;
+}
+
+div.bar.vert {
+  width: 40%;
+  margin-left: 5%;
+  float: left;
+  height: 100%;
+}
+
+.view-comments {
+  width: 50%;
+  margin-left: 25%;
+}
+
+.view-comments a {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 30px;
+}
+
+.filter-comment p {
+  line-height: 36px;
+  text-align: right;
+}
+
+.dropdown button p {
+  font-weight: bold;
+  height: 36px;
+  line-height: 36px;
+  display: inline;
+}
+
+.dropdown button i,
+.dropdown button p {
+  vertical-align: middle;
+  color: #0f1c2c;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content li {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content li.current {
+  font-weight: bold;
+}
+
+.show {
+  display: block;
+}
+
+#comments-container {
+  max-width: 1200px;
+  margin: auto;
+  padding-top: 40px;
+}
+
+.card h6 {
+  font-size: 11.5pt;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.card .comment-info {
+  margin-top: 20px;
+  float: left;
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+.card i.comment-rating {
+  float: right;
+  width: 50%;
+  text-align: right;
+  padding-right: 20px;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 15px;
+  color: #bebebe;
+}
+
+.card .comment-date {
+  opacity: 0.4;
+  font-size: 10.75pt;
+}
+
+.card .comment-contact {
+  opacity: 0.8;
+}
+
+.card .comment-contact:hover {
+  opacity: 1;
+}
+
+.card a {
+  color: #0477d7 !important;
+  text-decoration: none !important;
+}
+
+.card-columns {
+  margin-right: 40px;
+  column-count: 3;
+}
+
+@media screen and (max-width: 767px) {
+  #dashboard {
+    padding: 0px 10px;
+  }
+
+  .app-header h1 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 12px;
+    width: 100%;
+    padding: 0;
+  }
+
+  #dashboard-content {
+    width: 85%;
+  }
+
+  .dash-header {
+    padding: 35px 20px 0px 20px;
+  }
+
+  .app-header .col-md-3 {
+    width: 50%;
+    padding: 0 5px;
+  }
+
+  .tab-row {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: none;
+  }
+
+  .tab-row li {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    border-bottom: solid 1px #e6e7e8;
+  }
+
+  .tab-row ul {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .numbers-row {
+    width: 84%;
+    margin: 0 8%;
+  }
+
+  .numbers-row .col-md-3 {
+    width: 50%;
+    margin: 20px 0;
+  }
+
+  #toggle-detail {
+    margin: 20px 0;
+  }
+
+  #toggle-detail hr {
+    width: 160px;
+  }
+
+  .graph-color-swatch {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: cornflowerblue;
+  }
+
+  div.section {
+    margin: 90px 0;
+  }
+
+  #halfSpark {
+    margin-bottom: 0px;
+    padding-bottom: 0;
+    width: 60px;
+    margin-left: 30px;
+  }
+
+  #top-rated-apps .col-md-4 {
+    width: 33%;
+  }
+
+  #top-rated-apps .app-icon p {
+    width: 90%;
+    margin-left: 5%;
+    font-size: 16px;
+  }
+
+  #comment-percentages p {
+    width: 260px;
+    margin: 0 auto 50px;
+  }
+
+  #comment-percentages button {
+    margin-top: 0;
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  #trending-topics .col-md-6 {
+    margin: 20px 0 50px 0;
+  }
+
+  #detailed-report {
+    margin: 60px 0;
+  }
+
+  #detailed-report .col-md-3.icons {
+    width: 33%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #detailed-report .col-md-3.icons i {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+  }
+
+  #detailed-report .col-md-1 {
+    width: 13%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #detailed-report .col-md-8 {
+    width: 54%;
+  }
+
+  #app-drawer .col-md-4 {
+    width: 33%;
+  }
+
+  #app-drawer .row {
+    margin: 40px auto;
+  }
+
+  .card-columns {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  #dashboard-content {
+    width: 100%;
+  }
+}
