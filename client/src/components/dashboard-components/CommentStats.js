@@ -1,5 +1,6 @@
 import React from "react";
 
+/**Displays the percentages of positive, negative and neutral reviews that left comments. */
 const CommentStats = data => {
   return (
     <div className="section" id="comment-percentages">
@@ -18,8 +19,8 @@ const CommentStats = data => {
         </div>
       </div>
       <div className="row">
-        <div className="col-md-4" />
-        <div className="col-md-4">
+        <div className="col-md-3" />
+        <div className="col-md-6">
           <button
             id="comment-button"
             onClick={data.toggleView}
@@ -28,7 +29,7 @@ const CommentStats = data => {
             view comments
           </button>
         </div>
-        <div className="col-md-4" />
+        <div className="col-md-3" />
       </div>
     </div>
   );

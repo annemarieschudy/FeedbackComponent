@@ -33,6 +33,7 @@ class AppDashboard extends Component {
       timeframe: "two-weeks",
       stats: {},
       detailStats: {},
+      chartVal: "positive",
       chartStats: {},
       commentStats: {},
       comments: [],
@@ -54,16 +55,22 @@ class AppDashboard extends Component {
     this.toggleDetailReport = this.toggleDetailReport.bind(this);
     this.filterComments = this.filterComments.bind(this);
     this.updateFilters = this.updateFilters.bind(this);
+    this.toggleDevice = this.toggleDevice.bind(this);
+    this.toggleChartValue = this.toggleChartValue.bind(this);
   }
 
   componentDidMount() {
-    const dates = getChartDates(this.state.timeframe); //get the dates for the chart
+    let dates = getChartDates(this.state.timeframe); //get the dates for the chart
     const time = this.state.timeframe; //set timeframe
     this.props.getAppById(this.props.match.params.id); //get the app by the id in the URL
     this.props.getStats(this.props.match.params.id, time); //get the stats for the app
     this.props.getDetailedData(this.props.match.params.id, time);
     this.props.getCommentPercentages(this.props.match.params.id, time);
-    this.props.getChartStats(this.props.match.params.id, "positive", dates);
+    this.props.getChartStats(
+      this.props.match.params.id,
+      this.state.chartVal,
+      dates
+    );
     this.props.getComments(
       this.props.match.params.id,
       "all",
@@ -131,8 +138,8 @@ class AppDashboard extends Component {
     this.props.getDetailedData(this.props.match.params.id, e.target.id);
 
     //update the chart
-    const dates = getChartDates(e.target.id);
-    this.props.getChartStats(this.props.match.params.id, "positive", dates);
+    let newDates = getChartDates(e.target.id);
+    this.props.getChartStats(this.props.match.params.id, "positive", newDates);
 
     //update comments
     this.props.getComments(
@@ -162,15 +169,43 @@ class AppDashboard extends Component {
     //get the data
     this.props.getDetailedData(
       this.props.match.params.id,
-      this.state.timeframe
+      this.state.timeframe,
+      "both"
     );
+  }
+
+  //show or hide the detailed report
+  toggleDevice(device) {
+    this.props.getDetailedData(
+      this.props.match.params.id,
+      this.state.timeframe,
+      device
+    );
+  }
+
+  toggleChartValue(e) {
+    //TODO: Get this working to where it sets the selected value as the chartVal and changes the chart data accordingly
+    /* console.log(e.target.id);
+    this.setState({
+      chartVal: e.target.id
+    });
+    let dates = getChartDates(this.state.timeframe); //get the dates for the chart
+    console.log(this.state.charVal);
+    this.props.getChartStats(
+      this.props.match.params.id,
+      this.state.chartVal,
+      dates
+    ); */
+    document.getElementById("chart-legend-values").classList.add("hidden");
   }
 
   //update the filters on the comments based on button input
   filterComments(value1, value2, device) {
     //if all values are selected, value1 == "all" and value2 is null. If two values are selected, value1 and value2 will be set to those values. Device is "mobile", "desktop" or "both".
     if ((device && value1) || (device && value2)) {
-      this.state.message = "";
+      this.setState({
+        message: ""
+      });
       this.props.getComments(
         this.props.match.params.id,
         value1,
@@ -191,7 +226,9 @@ class AppDashboard extends Component {
   updateFilters(id) {
     this.state.filters[id] = !this.state.filters[id];
     if (!(this.state.filters.desktop || this.state.filters.mobile)) {
-      this.state.message = "Please select at least one device type.";
+      this.setState({
+        message: "Please select at least one device type."
+      });
     } else if (
       !(
         this.state.filters.positive ||
@@ -199,8 +236,10 @@ class AppDashboard extends Component {
         this.state.filters.neutral
       )
     ) {
-      this.state.message =
-        "Please select at least one value - positive, negative or neutral - to view comments.";
+      this.setState({
+        message:
+          "Please select at least one value - positive, negative or neutral - to view comments."
+      });
     }
   }
 
@@ -218,7 +257,7 @@ class AppDashboard extends Component {
     let dashHead; //the header content
     let dashContent; //the body of the dashboard
 
-    if (app == {} || app == undefined) {
+    if (app === {} || app === undefined) {
       dashHead = "";
     } else {
       //dashhead contains title, "feedback"/"comment" buttons, timeframe tabs and back button.
@@ -234,10 +273,10 @@ class AppDashboard extends Component {
 
     if (
       this.state.loading ||
-      this.state.app == {} ||
-      this.state.stats == {} ||
-      this.state.chartData == {} ||
-      this.state.commeents == []
+      this.state.app === {} ||
+      this.state.stats === {} ||
+      this.state.chartData === {} ||
+      this.state.commeents === []
     ) {
       dashContent = "";
     } else if (this.state.current === "comment-button") {
@@ -282,8 +321,16 @@ class AppDashboard extends Component {
               <hr />
             </div>
           </div>
-          <DetailedReport stats={detailedStats} total={stats.total} />
-          <Chart stats={chartStats} />
+          <DetailedReport
+            stats={detailedStats}
+            total={stats.total}
+            toggleDevice={this.toggleDevice}
+          />
+          <Chart
+            stats={chartStats}
+            value={this.state.chartVal}
+            toggleChartValue={this.toggleChartValue}
+          />
           <CommentStats data={commentStats} toggleView={this.toggleView} />
         </div>
       );
@@ -308,7 +355,7 @@ AppDashboard.propTypes = {
   /**The app that the dashboard is for. */
   app: PropTypes.object.isRequired,
   /**All apps in the DB, to display in the app drawer */
-  apps: PropTypes.object.isRequired,
+  apps: PropTypes.array.isRequired,
   /**The timeframe to show data for, can be selected in navigation */
   timeframe: PropTypes.string.isRequired,
   /**Feedback stats for the app (total, positive, negative, neutral) */
@@ -318,9 +365,11 @@ AppDashboard.propTypes = {
   /**The percentage of reviewers that left comments. */
   commentStats: PropTypes.object.isRequired,
   /**Comments left for the app */
-  comments: PropTypes.object.isRequired,
+  comments: PropTypes.array.isRequired,
   /**Percentages and dates to display in the chart */
   chartStats: PropTypes.object.isRequired,
+  /**The type of rating being charted (positive, negative or neutral) */
+  chartVal: PropTypes.string.isRequired,
   /**Function to get the current app by the id in the url */
   getAppById: PropTypes.func.isRequired,
   /** Get all apps in the DB to display in app drawer */
@@ -338,7 +387,8 @@ AppDashboard.propTypes = {
 };
 
 AppDashboard.defaultProps = {
-  timeframe: "two-weeks"
+  timeframe: "two-weeks",
+  chartVal: "positive"
 };
 
 const mapStateToProps = state => ({

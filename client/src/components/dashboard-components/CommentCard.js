@@ -10,7 +10,7 @@ const CommentCard = (comment, ratingType, rating, date, contact) => {
 
   let icon; //display the icon of the type of rating that the comment was submitted with
   if (comment.ratingType === "thumbs") {
-    if (comment.rating == 1) {
+    if (comment.rating === 1) {
       //thumbs up
       icon = (
         <i className="material-icons m-1 mt-0 mb-0 comment-rating">thumb_up</i>
@@ -24,24 +24,44 @@ const CommentCard = (comment, ratingType, rating, date, contact) => {
       );
     }
   } else if (comment.ratingType === "slider") {
-    if (comment.rating == 5) {
+    if (comment.rating === 5) {
       //grinning face
-      icon = <i className="m-1 mt-0 mb-0 comment-rating">😀</i>;
+      icon = (
+        <span role="img" aria-label="very happy face">
+          <i className="m-1 mt-0 mb-0 comment-rating">😀</i>
+        </span>
+      );
     } else if (comment.rating == 4) {
       //happy face
-      icon = <i className="m-1 mt-0 mb-0 comment-rating">🙂</i>;
+      icon = (
+        <span role="img" aria-label="happy face">
+          <i className="m-1 mt-0 mb-0 comment-rating">🙂</i>
+        </span>
+      );
     } else if (comment.rating == 3) {
       //neutral face
-      icon = <i className="m-1 mt-0 mb-0 comment-rating">😐</i>;
+      icon = (
+        <span role="img" aria-label="neutral face">
+          <i className="m-1 mt-0 mb-0 comment-rating">😐</i>
+        </span>
+      );
     } else if (comment.rating == 2) {
       //unhappy face
-      icon = <i className="m-1 mt-0 mb-0 comment-rating">😒</i>;
+      icon = (
+        <span role="img" aria-label="unhappy face">
+          <i className="m-1 mt-0 mb-0 comment-rating">😒</i>
+        </span>
+      );
     } else if (comment.rating == 1) {
       //angry face
-      icon = <i className="m-1 mt-0 mb-0 comment-rating">😤</i>;
+      icon = (
+        <span role="img" aria-label="angry face">
+          <i className="m-1 mt-0 mb-0 comment-rating">😤</i>
+        </span>
+      );
     }
   } else if (comment.ratingType === "sparks") {
-    if (comment.rating == 5) {
+    if (comment.rating === 5) {
       //5 sparks
       icon = (
         <div className="comment-rating-container">
@@ -62,7 +82,7 @@ const CommentCard = (comment, ratingType, rating, date, contact) => {
           </i>
         </div>
       );
-    } else if (comment.rating == 4) {
+    } else if (comment.rating === 4) {
       //4 sparks
       icon = (
         <div className="comment-rating-container">
@@ -80,7 +100,7 @@ const CommentCard = (comment, ratingType, rating, date, contact) => {
           </i>
         </div>
       );
-    } else if (comment.rating == 3) {
+    } else if (comment.rating === 3) {
       //3 sparks
       icon = (
         <div className="comment-rating-container">
@@ -95,7 +115,7 @@ const CommentCard = (comment, ratingType, rating, date, contact) => {
           </i>
         </div>
       );
-    } else if (comment.rating == 2) {
+    } else if (comment.rating === 2) {
       //2 sparks
       icon = (
         <div className="comment-rating-container">
@@ -107,7 +127,7 @@ const CommentCard = (comment, ratingType, rating, date, contact) => {
           </i>
         </div>
       );
-    } else if (comment.rating == 1) {
+    } else if (comment.rating === 1) {
       //1 spark
       icon = (
         <i className="demo-icon icon-fullspark m-1 mt-0 comment-rating">

@@ -12,7 +12,7 @@ import {
 
 const initialState = {
   app: {},
-  apps: {},
+  apps: [],
   stats: {},
   detailedStats: {},
   chartStats: {},

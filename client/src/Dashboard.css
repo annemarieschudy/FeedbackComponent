@@ -573,6 +573,84 @@ button.filter-section.selected {
   color: #0477d7;
 }
 
+#chart-legend-label {
+  margin-top: 24px;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+#chart-legend-color {
+  background-color: #0071ce;
+  height: 16px;
+  width: 16px;
+  opacity: 0.7;
+  border-radius: 100%;
+  margin-top: 7px;
+  margin-right: 0;
+  padding-right: 0;
+  float: right;
+}
+
+#chart-legend-label h4 {
+  display: inline;
+  width: 50%;
+  text-align: left !important;
+  line-height: 30px;
+}
+
+#chart-legend-label ul {
+  display: inline;
+  top: 0;
+  left: 60%;
+  width: 40%;
+  position: absolute;
+  padding-bottom: 80px;
+}
+
+#chart-legend-label li {
+  list-style: none;
+  line-height: 30px;
+}
+
+#chart-legend-label ul.hidden li {
+  display: none;
+}
+
+#chart-legend-label li h4:hover {
+  font-weight: 600;
+}
+
+#chart-legend-label ul.hidden li.current-chart-value {
+  display: inline-block;
+}
+
+#chart-legend-label li.current-chart-value h4 {
+  font-weight: 600;
+}
+
+#chart-legend-label i {
+  font-size: 24px;
+  color: #bebebe;
+  opacity: 0.7;
+  margin-top: -5px;
+  margin-left: 6px;
+  display: inline;
+}
+
+#chart-legend-label i:hover {
+  opacity: 0.9;
+}
+
+#chart-legend-label i.active {
+  color: #979797;
+  opacity: 1;
+}
+
+#chart-legend-label i,
+#chart-legend-label span {
+  vertical-align: middle;
+}
+
 #bar-chart {
   height: 200px;
   overflow: hidden;
@@ -822,7 +900,7 @@ div.bar.vert {
   }
 
   #detailed-report {
-    margin: 60px 0;
+    margin: 40px 0 80px 0;
   }
 
   #detailed-report .col-md-3.icons {

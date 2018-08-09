@@ -126,22 +126,22 @@ export const getStats = (appId, time) => dispatch => {
 };
 
 //Get the number of sparks ratings of each value, thumb ratings of each value, and slider ratings of each value for an app (param appId) for a given timeframe (time) and returns them in an object.
-export const getDetailedData = (appId, time) => dispatch => {
+export const getDetailedData = (appId, time, device) => dispatch => {
   dispatch(setDataLoading());
   axios
     .all([
-      axios.get(`/api/dashboard/app/${appId}/thumbs/1/both/${time}`),
-      axios.get(`/api/dashboard/app/${appId}/thumbs/0/both/${time}`),
-      axios.get(`/api/dashboard/app/${appId}/sparks/5/both/${time}`),
-      axios.get(`/api/dashboard/app/${appId}/sparks/4/both/${time}`),
-      axios.get(`/api/dashboard/app/${appId}/sparks/3/both/${time}`),
-      axios.get(`/api/dashboard/app/${appId}/sparks/2/both/${time}`),
-      axios.get(`/api/dashboard/app/${appId}/sparks/1/both/${time}`),
-      axios.get(`/api/dashboard/app/${appId}/slider/5/both/${time}`),
-      axios.get(`/api/dashboard/app/${appId}/slider/4/both/${time}`),
-      axios.get(`/api/dashboard/app/${appId}/slider/3/both/${time}`),
-      axios.get(`/api/dashboard/app/${appId}/slider/2/both/${time}`),
-      axios.get(`/api/dashboard/app/${appId}/slider/1/both/${time}`)
+      axios.get(`/api/dashboard/app/${appId}/thumbs/1/${device}/${time}`),
+      axios.get(`/api/dashboard/app/${appId}/thumbs/0/${device}/${time}`),
+      axios.get(`/api/dashboard/app/${appId}/sparks/5/${device}/${time}`),
+      axios.get(`/api/dashboard/app/${appId}/sparks/4/${device}/${time}`),
+      axios.get(`/api/dashboard/app/${appId}/sparks/3/${device}/${time}`),
+      axios.get(`/api/dashboard/app/${appId}/sparks/2/${device}/${time}`),
+      axios.get(`/api/dashboard/app/${appId}/sparks/1/${device}/${time}`),
+      axios.get(`/api/dashboard/app/${appId}/slider/5/${device}/${time}`),
+      axios.get(`/api/dashboard/app/${appId}/slider/4/${device}/${time}`),
+      axios.get(`/api/dashboard/app/${appId}/slider/3/${device}/${time}`),
+      axios.get(`/api/dashboard/app/${appId}/slider/2/${device}/${time}`),
+      axios.get(`/api/dashboard/app/${appId}/slider/1/${device}/${time}`)
     ])
     .then(
       axios.spread(

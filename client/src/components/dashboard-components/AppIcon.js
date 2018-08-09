@@ -13,7 +13,7 @@ const AppIcon = app => {
 
   return (
     <div className="col-md-4">
-      <Link to={link}>
+      <Link to={link} onClick={onClick}>
         <div className="app-icon">
           <div className="app-icon-img" />
           <p className="app-label">{app.app.appName}</p>

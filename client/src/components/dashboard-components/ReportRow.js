@@ -16,14 +16,14 @@ const ReportRow = (ratingType, value, rating, total) => {
   if (ratingType.ratingType === "thumbs") {
     barColor = "#4a4a4a";
     barOpacity = "0.8";
-    if (ratingType.rating == 1) {
+    if (ratingType.rating === 1) {
       icon = <i className="material-icons m-1 mt-0 mb-0">thumb_up</i>;
     } else {
       icon = <i className="material-icons m-1 mt-0 mb-0">thumb_down</i>;
     }
   } else if (ratingType.ratingType === "slider") {
     barColor = "#0477D7";
-    barOpacity: "0.6";
+    barOpacity = "0.6";
     if (ratingType.rating == 5) {
       icon = (
         <span role="img" aria-label="very happy face">
@@ -57,8 +57,8 @@ const ReportRow = (ratingType, value, rating, total) => {
     }
   } else if (ratingType.ratingType === "sparks") {
     barColor = "#0F1C2C";
-    barOpacity: "0.75";
-    if (ratingType.rating == 5) {
+    barOpacity = "0.75";
+    if (ratingType.rating === 5) {
       icon = (
         <div>
           <i className="demo-icon icon-fullspark m-1 mt-0">&#xe800;</i>
