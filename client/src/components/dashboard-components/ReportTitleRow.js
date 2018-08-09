@@ -1,8 +1,9 @@
 import React from "react";
 
+/**A title row for the deatiled report bar chart that displays the title for the rating type. */
 const ReportTitleRow = ratingType => {
   return (
-    <div className="row">
+    <div className="row mt-4">
       <div className="col-md-3" />
       <div className="col-md-1 opacity-5">
         <h4>#</h4>

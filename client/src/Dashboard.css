@@ -21,6 +21,11 @@ a:hover,
 a:active,
 a:visited {
   text-decoration: none;
+  outline: none;
+}
+
+button:focus {
+  outline: none;
 }
 
 h1 {
@@ -500,7 +505,8 @@ div.card p {
 }
 
 #detailed-report {
-  margin: 70px 0;
+  margin: 70px 0 90px 0;
+  padding-bottom: 30px;
 }
 
 #detailed-report hr {
@@ -521,12 +527,21 @@ div.bar {
   background-color: #0f1c2c;
   opacity: 0.7;
   height: 24px;
+  max-height: 24px;
+  min-height: 24px;
 }
 
 #detailed-report .icons i {
   float: right;
   line-height: 24px;
   font-size: 22px;
+  font-style: normal;
+  color: #979797;
+}
+
+#detailed-report .icons i.icon-fullspark {
+  color: #fcc120;
+  opacity: 1;
 }
 
 #search-icon {
@@ -656,8 +671,26 @@ div.bar.vert {
   padding-right: 20px;
   box-sizing: border-box;
   position: absolute;
-  bottom: 15px;
+  bottom: 10px;
   color: #bebebe;
+  font-style: normal;
+  font-size: 20px;
+}
+
+.card .comment-rating-container {
+  float: right;
+  width: 45%;
+  margin-left: 45%;
+  text-align: right;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+}
+.card .comment-rating-container i.icon-fullspark {
+  width: 15%;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 .card .comment-date {

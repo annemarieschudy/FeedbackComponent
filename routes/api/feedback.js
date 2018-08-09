@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const validateInput = require("../../validation/input");
-
 //Load feedback model
-const Feedback = require("../../models/Feedback");
 const App = require("../../models/App");
 
 // @route GET api/feedback/test
@@ -12,36 +9,10 @@ const App = require("../../models/App");
 //@access Public
 router.get("/test", (req, res) => res.json({ msg: "feedback works" }));
 
-//@route GET api/feedback/:id
-//@desc Get a rating by its ID
-//@access Public
-router.get("/:id", (req, res) => {
-  const errors = {};
-
-  Feedback.findById(req.params.id)
-    .then(feedback => {
-      if (!feedback) {
-        errors.nofeedback = "There is no feedback with that id";
-        res.status(404).json(errors);
-      } else {
-        res.json(feedback);
-      }
-    })
-    .catch(err =>
-      res.status(400).json({ feedback: "There is no feedback with that id" })
-    );
-});
-
 //@route POST api/feedback/
 //@desc Create a unit of feedback for the provided app name
 //@access Public
 router.post("/", (req, res) => {
-  const { errors, isValid } = validateInput(req.body);
-  if (!isValid) {
-    // Return any errors with 400 status
-    return res.status(400).json(errors);
-  }
-
   const feedbackFields = {};
 
   //find the app that is being rated
@@ -77,66 +48,7 @@ router.post("/", (req, res) => {
 //@route POST api/feedback/:id/rate
 //@desc Update a feedback object for a rating of an app(:id refers to feedback id)
 //@access Public
-router.post("/:id/rate", (req, res) => {
-  const { errors, isValid } = validateInput(req.body);
-  if (!isValid) {
-    // Return any errors with 400 status
-    return res.status(400).json(errors);
-  }
-
-  Feedback.findById(req.params.id)
-    .then(feedback => {
-      if (feedback) {
-        if (
-          feedback.rating < 0 ||
-          feedback.rating === null ||
-          feedback.rating === undefined
-        ) {
-          //Update the rating field
-          App.findById(feedback.app).then(app => {
-            const newFb = {
-              feedbackId: feedback._id,
-              ratingType: req.body.ratingType,
-              rating: req.body.rating,
-              mobile: feedback.mobile
-            };
-            app.feedback.unshift(newFb);
-            app.save().then(app => res.json(app));
-
-            Feedback.findByIdAndUpdate(
-              req.params.id,
-              { $set: { rating: req.body.rating } },
-              { new: true },
-              function(err, feedback) {
-                if (err) return handleError(err);
-              }
-            );
-          });
-        } else {
-          res.json(app);
-        }
-      } else {
-        return res
-          .status(404)
-          .json({ feedbackdoesntexist: "No rating exists for this id" });
-      }
-    })
-    .catch(err =>
-      res.status(400).json({ noapp: "No rating exists for this id" })
-    );
-});
-
-//@route POST api/feedback/:id/rate
-//@desc Update a feedback object for a rating of an app(:id refers to feedback id)
-//@access Public
 router.post("/rate", (req, res) => {
-  //const { errors, isValid } = validateInput(req.body);
-  //if (!isValid) {
-  // Return any errors with 400 status
-  //return res.status(400).json(errors);
-  //}
-
-  //appId = localStorage.getItem("appId");
   const appId = req.body.app;
 
   App.findById(appId)
@@ -163,11 +75,6 @@ router.post("/rate", (req, res) => {
 //@desc Update a feedback object for a rating of an app(:id refers to feedback id)
 //@access Public
 router.post("/:id/comment", (req, res) => {
-  const { errors, isValid } = validateInput(req.body);
-  if (!isValid) {
-    // Return any errors with 400 status
-    return res.status(400).json(errors);
-  }
   //Update the rating field
   App.findById(req.body.app).then(app => {
     app.feedback.map(rating => {
@@ -211,7 +118,6 @@ router.post("/:id/contact", (req, res) => {
     });
 
     const newFb = {
-      //feedbackId: app.feedback[index].feedbackId,
       ratingType: app.feedback[index].ratingType,
       rating: app.feedback[index].rating,
       mobile: app.feedback[index].mobile,
@@ -224,41 +130,6 @@ router.post("/:id/contact", (req, res) => {
     app.feedback.unshift(newFb);
 
     app.save().then(app => res.json(app));
-  });
-});
-
-///@route POST api/feedback/:id/comment
-//@desc Update a feedback object for a rating of an app(:id refers to feedback id)
-//@access Public
-router.delete("/:id/delete", (req, res) => {
-  const { errors, isValid } = validateInput(req.body);
-  if (!isValid) {
-    // Return any errors with 400 status
-    return res.status(400).json(errors);
-  }
-
-  Feedback.findById(req.params.id).then(feedback => {
-    if (feedback) {
-      //Update the rating field
-      App.findById(feedback.app).then(app => {
-        app.feedback.map(rating => {
-          if (rating.feedbackId == feedback._id) {
-            index = app.feedback.indexOf(rating);
-          }
-        });
-
-        app.feedback.splice(index, 1);
-        app.save().then(app => res.json(app));
-      });
-
-      Feedback.findByIdAndRemove(req.params.id, function(err, feedback) {
-        if (err) return handleError(err);
-      });
-    } else {
-      return res
-        .status(404)
-        .json({ feedbackdoesntexist: "No rating exists for this id" });
-    }
   });
 });
 

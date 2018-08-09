@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const setDates = require("../../validation/dates");
+const setDates = require("../../helper-functions/dates");
 const mongoose = require("mongoose");
 
 // App model
 const App = require("../../models/App");
-
-// Feedback model
-const Feedback = require("../../models/Feedback");
 
 // @route   GET api/apps/test
 // @desc    Tests post route
@@ -38,8 +35,8 @@ router.get("/app/:id", (req, res) => {
     .catch(err => res.status(404).json({ app: "No app found with that id." }));
 });
 
-// @route   GET api/dashboard/app/:id
-// @desc    Get an app by its id
+// @route   GET api/dashboard/app/:name
+// @desc    Get an app by its name
 // @access  Public
 router.get("/app/name/:name", (req, res) => {
   App.findOne({ appName: req.params.name })
@@ -90,6 +87,7 @@ router.get("/app/:id/feedback", (req, res) => {
 //          :id refers to the id of the app
 //          :ratingtype filters by thumbs/sparks/sliders or all
 //          :value filters by positive/negative/neutral or all
+//          :device filters by mobile or desktop rating, or both
 //          :timeframe filters by two-weeks/this-quarter/this-year or custom
 //          :custom must provide params: startyear (required), startmonth,
 //          startdate, endyear (current by default), endmonth (current by default)
@@ -120,17 +118,19 @@ router.get("/app/:id/:ratingtype/:value/:device/:timeframe", (req, res) => {
             rating.ratingType === req.params.ratingtype ||
             req.params.ratingtype === "all"
           ) {
-            //if looking for all and it is in time frame, then count it
+            //if looking for all and it is in time frame
             if (
               req.params.value === "all" &&
               rating.date <= current &&
               rating.date >= start
             ) {
               if (
+                //check that the device type matches
                 (req.params.device === "mobile" && rating.mobile) ||
                 (req.params.device === "desktop" && !rating.mobile) ||
                 req.params.device === "both"
               ) {
+                //if all criteria are met, count it
                 count++;
               }
             }
@@ -213,7 +213,7 @@ router.get("/app/:id/:ratingtype/:value/:device/:timeframe", (req, res) => {
                   }
                 }
               }
-            } else if (rating.rating.toString() === req.params.value) {
+            } else if (rating.rating == req.params.value) {
               if (rating.date <= current && rating.date >= start) {
                 if (
                   (req.params.device === "mobile" && rating.mobile) ||
@@ -243,6 +243,7 @@ router.get("/app/:id/:ratingtype/:value/:device/:timeframe", (req, res) => {
 //          :id refers to the id of the app
 //          :ratingtype filters by thumbs/sparks/sliders or all
 //          :value filters by positive/negative/neutral or all
+//          :device filters by mobile or desktop rating, or both
 //          :timeframe filters by two-weeks/this-quarter/this-year or custom
 //          :custom must provide params: startyear (required), startmonth,
 //          startdate, endyear (current by default), endmonth (current by default)
@@ -392,6 +393,7 @@ router.get(
 //          :id refers to the id of the app
 //          :ratingtype filters by thumbs/sparks/sliders or all
 //          :value filters by positive/negative/neutral or all
+//          :device filters by mobile or desktop rating, or both
 //          :timeframe filters by two-weeks/this-quarter/this-year or custom
 //          :custom must provide params: startyear (required), startmonth,
 //          startdate, endyear (current by default), endmonth (current by default)
@@ -557,7 +559,10 @@ router.get(
         if (total > 0) {
           percentage = count / total;
         }
-        res.json(percentage * 100);
+
+        percentage = percentage * 100;
+        percentage = percentage.toFixed(0);
+        res.json(percentage);
       })
       .catch(err =>
         res
@@ -572,6 +577,7 @@ router.get(
 //          :id refers to the id of the app
 //          :ratingtype filters by thumbs/sparks/sliders or all
 //          :value filters by positive/negative/neutral or all
+//          :device filters by mobile or desktop rating, or both
 //          :timeframe filters by two-weeks/this-quarter/this-year or custom
 //          :custom must provide params: startyear (required), startmonth,
 //          startdate, endyear (current by default), endmonth (current by default)
@@ -609,7 +615,13 @@ router.get(
                   (req.params.device === "desktop" && !rating.mobile) ||
                   req.params.device === "both"
                 ) {
-                  comments.unshift(rating.comment);
+                  comments.push({
+                    comment: rating.comment,
+                    date: rating.date,
+                    ratingType: rating.ratingType,
+                    rating: rating.rating,
+                    contact: rating.contact
+                  });
                 }
               }
             } else if (req.params.value === "positive") {
@@ -629,7 +641,13 @@ router.get(
                     (req.params.device === "desktop" && !rating.mobile) ||
                     req.params.device === "both"
                   ) {
-                    comments.unshift(rating.comment);
+                    comments.push({
+                      comment: rating.comment,
+                      date: rating.date,
+                      ratingType: rating.ratingType,
+                      rating: rating.rating,
+                      contact: rating.contact
+                    });
                   }
                 }
               } else if (
@@ -647,7 +665,13 @@ router.get(
                     (req.params.device === "desktop" && !rating.mobile) ||
                     req.params.device === "both"
                   ) {
-                    comments.unshift(rating.comment);
+                    comments.push({
+                      comment: rating.comment,
+                      date: rating.date,
+                      ratingType: rating.ratingType,
+                      rating: rating.rating,
+                      contact: rating.contact
+                    });
                   }
                 }
               }
@@ -666,7 +690,13 @@ router.get(
                     (req.params.device === "desktop" && !rating.mobile) ||
                     req.params.device === "both"
                   ) {
-                    comments.unshift(rating.comment);
+                    comments.push({
+                      comment: rating.comment,
+                      date: rating.date,
+                      ratingType: rating.ratingType,
+                      rating: rating.rating,
+                      contact: rating.contact
+                    });
                   }
                 }
               } else if (
@@ -684,7 +714,13 @@ router.get(
                     (req.params.device === "desktop" && !rating.mobile) ||
                     req.params.device === "both"
                   ) {
-                    comments.unshift(rating.comment);
+                    comments.push({
+                      comment: rating.comment,
+                      date: rating.date,
+                      ratingType: rating.ratingType,
+                      rating: rating.rating,
+                      contact: rating.contact
+                    });
                   }
                 }
               }
@@ -700,7 +736,13 @@ router.get(
                     (req.params.device === "desktop" && !rating.mobile) ||
                     req.params.device === "both"
                   ) {
-                    comments.unshift(rating.comment);
+                    comments.push({
+                      comment: rating.comment,
+                      date: rating.date,
+                      ratingType: rating.ratingType,
+                      rating: rating.rating,
+                      contact: rating.contact
+                    });
                   }
                 }
               }
@@ -715,7 +757,13 @@ router.get(
                   (req.params.device === "desktop" && !rating.mobile) ||
                   req.params.device === "both"
                 ) {
-                  comments.unshift(rating.comment);
+                  comments.push({
+                    comment: rating.comment,
+                    date: rating.date,
+                    ratingType: rating.ratingType,
+                    rating: rating.rating,
+                    contact: rating.contact
+                  });
                 }
               }
             }
@@ -731,5 +779,150 @@ router.get(
       );
   }
 );
+
+// @route   GET api/dashboard/app/:id/:ratingtype/:value/:timeframe/percentage
+// @desc    Gets percentage of feedback the meets the requirements for each specific date provided in :dates
+//          :id refers to the id of the app
+//          :ratingtype filters by thumbs/sparks/sliders or all
+//          :value filters by positive/negative/neutral or all
+//          :device filters by mobile or desktop rating, or both
+//          :dates is a list of dates
+
+//          Returns object with dates as keys and PERCENTAGE of reviews that meet criteria on that date.
+// @access  Public
+router.get("/app/:id/:ratingtype/:value/:device/chart/:dates", (req, res) => {
+  App.findById(req.params.id)
+    .then(app => {
+      if (!app) {
+        return res
+          .status(400)
+          .json({ notratedyet: "This app has not been rated yet." });
+      }
+
+      let stats = {}; //object to return
+      let dates = req.params.dates; //list of dates
+      dates = dates.split(","); //turn it into an array
+
+      for (var i in dates) {
+        let count = 0;
+        let total = 0;
+        app.feedback.map(rating => {
+          day = dates[i].split(" "); //turn date string into array
+          feedbackDate = String(rating.date);
+          feedbackDate = feedbackDate.split(" "); //turn feedback's date into string array
+          if (
+            //compare day,month and year to see if they match
+            feedbackDate[1] == day[1] &&
+            feedbackDate[2] == day[2] &&
+            feedbackDate[3] == day[3]
+          ) {
+            total = total + 1; //increase total for that day
+            //check if rating meets requirements and increase count if so
+            if (
+              rating.ratingType === req.params.ratingtype ||
+              req.params.ratingtype === "all"
+            ) {
+              if (req.params.value === "all") {
+                if (
+                  (req.params.device === "mobile" && rating.mobile) ||
+                  (req.params.device === "desktop" && !rating.mobile) ||
+                  req.params.device === "both"
+                ) {
+                  count++;
+                }
+              } else if (req.params.value === "positive") {
+                if (
+                  (req.params.ratingtype === "thumbs" && rating.rating === 1) ||
+                  (req.params.ratingtype === "all" &&
+                    rating.ratingType === "thumbs" &&
+                    rating.rating === 1)
+                ) {
+                  if (
+                    (req.params.device === "mobile" && rating.mobile) ||
+                    (req.params.device === "desktop" && !rating.mobile) ||
+                    req.params.device === "both"
+                  ) {
+                    count++;
+                  }
+                } else if (
+                  (req.params.ratingtype === "sparks" && rating.rating > 3) ||
+                  (req.params.ratingtype === "slider" && rating.rating > 3) ||
+                  (req.params.ratingtype === "all" && rating.rating > 3)
+                ) {
+                  if (
+                    (req.params.device === "mobile" && rating.mobile) ||
+                    (req.params.device === "desktop" && !rating.mobile) ||
+                    req.params.device === "both"
+                  ) {
+                    count++;
+                  }
+                }
+              } else if (req.params.value === "negative") {
+                if (
+                  (req.params.ratingtype === "thumbs" && rating.rating === 0) ||
+                  (req.params.ratingtype === "all" && rating.rating === 0)
+                ) {
+                  if (
+                    (req.params.device === "mobile" && rating.mobile) ||
+                    (req.params.device === "desktop" && !rating.mobile) ||
+                    req.params.device === "both"
+                  ) {
+                    count++;
+                  }
+                } else if (
+                  (req.params.ratingtype === "sparks" && rating.rating < 3) ||
+                  (req.params.ratingtype === "slider" && rating.rating < 3) ||
+                  (req.params.ratingtype === "all" && rating.rating < 3)
+                ) {
+                  if (
+                    (req.params.device === "mobile" && rating.mobile) ||
+                    (req.params.device === "desktop" && !rating.mobile) ||
+                    req.params.device === "both"
+                  ) {
+                    count++;
+                  }
+                }
+              } else if (req.params.value === "neutral") {
+                if (rating.rating === 3) {
+                  if (
+                    (req.params.device === "mobile" && rating.mobile) ||
+                    (req.params.device === "desktop" && !rating.mobile) ||
+                    req.params.device === "both"
+                  ) {
+                    count++;
+                  }
+                }
+              } else if (rating.rating.toString() === req.params.value) {
+                if (
+                  (req.params.device === "mobile" && rating.mobile) ||
+                  (req.params.device === "desktop" && !rating.mobile) ||
+                  req.params.device === "both"
+                ) {
+                  count++;
+                }
+              }
+            }
+          }
+        });
+
+        //calculate percentage count/total
+        let percentage = 0;
+        if (total > 0) {
+          percentage = count / total;
+        }
+        percentage = percentage * 100;
+
+        //format date into string for displaying (and key value)
+        const curDay =
+          String(day[1]) + " " + String(day[2]) + " " + String(day[3]);
+        stats[curDay] = percentage; //update object with key value pair
+      }
+
+      res.json(stats);
+    })
+    .catch(err =>
+      res.status(400).json({ notratedyet: "This app has not been rated yet." })
+    );
+});
 
 module.exports = router;

@@ -1,29 +1,88 @@
-import React, { Component } from "react";
+import React from "react";
 import ReportRow from "./ReportRow";
 import ReportTitleRow from "./ReportTitleRow";
 
-class DetailedReport extends Component {
-  render() {
-    return (
-      <div id="detailed-report" className="collapse">
-        <ReportTitleRow ratingType="Thumbs" />
-        <ReportRow ratingType="thumbs" value="0" timeframe="two-weeks" />
-        <ReportRow ratingType="thumbs" value="1" timeframe="two-weeks" />
-        <ReportTitleRow ratingType="Slider" />
-        <ReportRow ratingType="slider" value="1" timeframe="two-weeks" />
-        <ReportRow ratingType="slider" value="2" timeframe="two-weeks" />
-        <ReportRow ratingType="slider" value="3" timeframe="two-weeks" />
-        <ReportRow ratingType="slider" value="4" timeframe="two-weeks" />
-        <ReportRow ratingType="slider" value="5" timeframe="two-weeks" />
-        <ReportTitleRow ratingType="Sparks" />
-        <ReportRow ratingType="sparks" value="1" timeframe="two-weeks" />
-        <ReportRow ratingType="sparks" value="2" timeframe="two-weeks" />
-        <ReportRow ratingType="sparks" value="3" timeframe="two-weeks" />
-        <ReportRow ratingType="sparks" value="4" timeframe="two-weeks" />
-        <ReportRow ratingType="sparks" value="5" timeframe="two-weeks" />
-      </div>
-    );
-  }
-}
+/**Displays the detailed data for each AppDashboard by showing a bar chart with values for each value of each rating type and the number of reviews for each with an icon. */
+const DetailedReport = (stats, total) => {
+  return (
+    <div id="detailed-report" className="collapse">
+      <ReportTitleRow ratingType="Thumbs" />
+      <ReportRow
+        ratingType="thumbs"
+        value={stats.stats.thumbup}
+        rating="1"
+        total={stats.total}
+      />
+      <ReportRow
+        ratingType="thumbs"
+        value={stats.stats.thumbdown}
+        rating="0"
+        total={stats.total}
+      />
+      <ReportTitleRow ratingType="Slider" />
+      <ReportRow
+        ratingType="slider"
+        value={stats.stats.slider5}
+        rating="5"
+        total={stats.total}
+      />
+      <ReportRow
+        ratingType="slider"
+        value={stats.stats.slider4}
+        rating="4"
+        total={stats.total}
+      />
+      <ReportRow
+        ratingType="slider"
+        value={stats.stats.slider3}
+        rating="3"
+        total={stats.total}
+      />
+      <ReportRow
+        ratingType="slider"
+        value={stats.stats.slider2}
+        rating="2"
+        total={stats.total}
+      />
+      <ReportRow
+        ratingType="slider"
+        value={stats.stats.slider1}
+        rating="1"
+        total={stats.total}
+      />
+      <ReportTitleRow ratingType="Sparks" />
+      <ReportRow
+        ratingType="sparks"
+        value={stats.stats.spark5}
+        rating="5"
+        total={stats.total}
+      />
+      <ReportRow
+        ratingType="sparks"
+        value={stats.stats.spark4}
+        rating="4"
+        total={stats.total}
+      />
+      <ReportRow
+        ratingType="sparks"
+        value={stats.stats.spark3}
+        rating="3"
+        total={stats.total}
+      />
+      <ReportRow
+        ratingType="sparks"
+        value={stats.stats.spark2}
+        rating="2"
+        total={stats.total}
+      />
+      <ReportRow
+        ratingType="sparks"
+        value={stats.stats.spark1}
+        rating="1"
+        total={stats.total}
+      />
+    </div>
+  );
+};
 
 export default DetailedReport;

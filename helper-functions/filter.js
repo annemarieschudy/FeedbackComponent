@@ -1,3 +1,5 @@
+//TODO create functions for filtering a rating to avoid copy and pasting if statements in api/dashboard get requests
+
 module.exports = function isPositive(rating) {
   let filter = false;
 

@@ -1,5 +1,6 @@
 import React from "react";
 
+/** The tabs for selecting the timeframe of data you want to view in the dashboard. */
 const TabRow = toggler => {
   return (
     <div className="row tab-row">

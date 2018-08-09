@@ -2,6 +2,7 @@ import React from "react";
 import Comment from "./Comment";
 import PropTypes from "prop-types";
 
+/** The feedback prompt for a slider rating. */
 const Slider = ({
   text,
   comment,
@@ -17,14 +18,14 @@ const Slider = ({
 
   const onInput = e => {
     var labels = ["😤", "😒", "😐", "🙂", "😀"]; //face reactions
-    var ariaLabels = ["angry", "unhappy", "ok", "happy", "very happy"];
+    var ariaLabels = ["angry", "unhappy", "ok", "happy", "very happy"]; //accessibility labels for each face
     var output = document.getElementById("feedback-comp-slider-label"); //where the faces will go
 
     var slider = document.getElementById("feedback-comp-ratingsSlider");
-    this.value = slider.value;
+    this.value = slider.value; //update the slider button position with value
 
     var gradients = [
-      //slider colors change based on the review
+      //slider colors change based on the value
       "linear-gradient(to left, #ffada5, #ffada5)",
       "linear-gradient(to left, #ffada5, #e6e6e6)",
       "linear-gradient(to left, #e6e6e6, #e6e6e6)",
@@ -34,25 +35,31 @@ const Slider = ({
 
     output.innerHTML = `<span role="img" aria-label="${
       ariaLabels[slider.value]
-    }">${labels[slider.value]}</span>`; //set face
+    }">${labels[slider.value]}</span>`; //set face output
     slider.style.backgroundImage = gradients[slider.value]; //set slider color
+
+    //activie submit button by setting opacity to 1
     setTimeout(function() {
       document
         .getElementById("feedback-comp-forward-button")
         .classList.remove("feedback-comp-inactive-button");
     }, 200);
+
     rated = true;
-    rating = e.target.value;
+    rating = e.target.value; //get the value from the slider
   };
 
   const onSubmit = () => {
     if (rated) {
+      //can only submit if it has been rated
       addARating(Number(rating) + 1, "slider");
 
       setTimeout(function() {
+        //hide the slider section
         document
           .getElementById("feedback-comp-slider-section")
           .classList.add("feedback-comp-hidden");
+        //display the comment section
         document
           .getElementById("feedback-comp-comment-comp")
           .classList.remove("feedback-comp-hidden");
@@ -118,12 +125,19 @@ const Slider = ({
 };
 
 Slider.propTypes = {
+  /**The text of the prompt. */
   text: PropTypes.string,
+  /**The comment text. */
   comment: PropTypes.string,
+  /**True if can contact */
   canContact: PropTypes.bool,
+  /**How to contact the user */
   walmartId: PropTypes.string,
+  /**Updates feedback unit with a number rating 1,2,3,4,5 */
   addARating: PropTypes.func.isRequired,
+  /**Updates the feedback unit with the comment text */
   addAComment: PropTypes.func.isRequired,
+  /**Updates the feedback unit with the contact info */
   addContactInfo: PropTypes.func.isRequired
 };
 

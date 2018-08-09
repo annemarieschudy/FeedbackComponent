@@ -94,7 +94,6 @@ const Feedback = ({
 
   //style the component based on the colorTheme and position props
   const classeslist = `feedback-component-color-theme-${colorTheme} feedback-component-position-${position}`;
-  const apptype = { appType };
   return (
     <div id="feedback-component" className={classeslist}>
       <Idle

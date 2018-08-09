@@ -2,6 +2,7 @@ import React from "react";
 import Comment from "./Comment";
 import PropTypes from "prop-types";
 
+/** The feedback prompt for a thumbs up / thumbs down rating. */
 const Thumbs = ({
   text,
   comment,
@@ -48,9 +49,7 @@ const Thumbs = ({
         <div className="feedback-comp-row">
           <div className="feedback-comp-content row">
             <div className="feedback-comp-prompt col-lg-7 col-md-8 col-sm-8 col-xs-9 pl-3">
-              <h1>
-                How would you rate your experience on <nobr>this site?</nobr>
-              </h1>
+              <h1>{text}</h1>
             </div>
             <div className="col-lg-4 col-md-4 pl-3 col-sm-4 col-xs-3 feedback-comp-thumbs-container">
               <div className="feedback-comp-thumb">
@@ -90,12 +89,19 @@ const Thumbs = ({
 };
 
 Thumbs.propTypes = {
+  /**The text of the prompt. */
   text: PropTypes.string,
+  /**The comment text. */
   comment: PropTypes.string,
+  /**True if can contact */
   canContact: PropTypes.bool,
+  /**How to contact the user */
   walmartId: PropTypes.string,
+  /**Updates feedback unit with a number rating 0 or 1*/
   addARating: PropTypes.func.isRequired,
+  /**Updates the feedback unit with the comment text */
   addAComment: PropTypes.func.isRequired,
+  /**Updates the feedback unit with the contact info */
   addContactInfo: PropTypes.func.isRequired
 };
 

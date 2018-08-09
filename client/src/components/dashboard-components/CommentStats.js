@@ -5,24 +5,28 @@ const CommentStats = data => {
     <div className="section" id="comment-percentages">
       <div className="row">
         <div className="col-md-4">
-          <h1 className="first">{data.data[0]}%</h1>
+          <h1 className="first">{data.data.positive}%</h1>
           <p>of positive reviewers left comments</p>
         </div>
         <div className="col-md-4">
-          <h1 className="second">{data.data[1]}%</h1>
+          <h1 className="second">{data.data.neutral}%</h1>
           <p>of neutral reviewers left comments</p>
         </div>
         <div className="col-md-4">
-          <h1 className="third">{data.data[2]}%</h1>
+          <h1 className="third">{data.data.negative}%</h1>
           <p>of negative reviewers left comments</p>
         </div>
       </div>
       <div className="row">
         <div className="col-md-4" />
         <div className="col-md-4">
-          <a href="commentReport.html">
-            <button className="button-current">view comments</button>
-          </a>
+          <button
+            id="comment-button"
+            onClick={data.toggleView}
+            className="button-current"
+          >
+            view comments
+          </button>
         </div>
         <div className="col-md-4" />
       </div>

@@ -1,14 +1,22 @@
 import React from "react";
 import StatBlock from "./StatBlock";
 
-const Stats = data => {
-  console.log(data.data);
+/** Displays overview stats for the appDashboard. Number of all reviews, and number of positive, negative and neutral reviews. TODO Change over time. */
+const Stats = stats => {
+  console.log(stats);
+  const labels = [
+    "left feedback",
+    "postive reviews",
+    "neutral reviews",
+    "negative reviews"
+  ];
+
   return (
     <div className="row numbers-row">
-      <StatBlock value={data.data[0]} label={"left feedback"} />
-      <StatBlock value={data.data[1]} label="positive reviews" />
-      <StatBlock value={data.data[2]} label="neutral reviews" />
-      <StatBlock value={data.data[3]} label="negative reviews" />
+      <StatBlock value={stats.total} label={labels[0]} />
+      <StatBlock value={stats.positive} label={labels[0]} />
+      <StatBlock value={stats.neutral} label={labels[0]} />
+      <StatBlock value={stats.negative} label={labels[0]} />
     </div>
   );
 };

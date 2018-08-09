@@ -8,8 +8,9 @@ import {
   contactInfo
 } from "../actions/rateActions";
 
-import Feedback from "./rating-systems/Feedback";
+import Feedback from "./feedback-components/Feedback";
 
+/** A container for demonstrating the use of a feedback component within a website. */
 class FeedbackContainer extends Component {
   constructor() {
     super();
@@ -35,8 +36,9 @@ class FeedbackContainer extends Component {
   }
 
   render() {
+    //Adds a feedback unit to the feedback array of the current app.
     const addARating = (value, type) => {
-      const isMobile = getBrowserDimensions();
+      const isMobile = getBrowserDimensions(); //if apptype is "app" or if screen size is small enough
       const newRating = {
         app: localStorage.getItem("appId"),
         value: value,
@@ -46,16 +48,18 @@ class FeedbackContainer extends Component {
       this.props.rateApp(newRating);
     };
 
+    //update current app and feedback unit with contact information
     const addContactInfo = canContact => {
       const newContact = {
         app: localStorage.getItem("appId"),
         feedback: localStorage.getItem("feedbackId"),
         canContact: canContact,
-        walmartId: getCurrentUser()
+        walmartId: getCurrentUser() //function to get current authorized user
       };
       this.props.contactInfo(newContact);
     };
 
+    //update a current app and feedback unit with commentText
     const addAComment = commentText => {
       const newComment = {
         app: localStorage.getItem("appId"),
@@ -66,11 +70,13 @@ class FeedbackContainer extends Component {
       this.props.addComment(newComment);
     };
 
+    //TODO: return the current authorized user
     const getCurrentUser = () => {
       const user = "a0s01ph";
       return user;
     };
 
+    //if on a desktop or web app and the screen is narrow and short enough, or if on a mobile app, set mobile to true.
     const getBrowserDimensions = () => {
       let isMobile = false;
       if (

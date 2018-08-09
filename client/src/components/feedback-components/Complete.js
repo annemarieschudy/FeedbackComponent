@@ -1,5 +1,6 @@
 import React from "react";
 
+/** The final message of the feedback experience, notifying the user that their feedback is complete and submitted. */
 const Complete = complete => {
   return (
     <div>

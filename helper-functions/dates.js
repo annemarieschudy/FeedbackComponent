@@ -1,4 +1,6 @@
 module.exports = function setDates(req) {
+  //based on the time frame in req.params.timeframe, determine the date to start counting feedback from and the date to stop counting feedback after (current). Return both dates.
+
   let start = new Date();
   let current = new Date();
 

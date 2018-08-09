@@ -4,9 +4,7 @@ import store from "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import FeedbackContainer from "./components/FeedbackContainer";
-import Dashboard from "./components/Dashboard";
 import AppDashboard from "./components/AppDashboard";
-import Comments from "./components/dashboard-components/Comments";
 
 import "./App.css";
 
@@ -70,13 +68,7 @@ class App extends Component {
               )}
             />
 
-            <Route exact path="/dashboard/app/:name" component={AppDashboard} />
-
-            <Route
-              exact
-              path="/dashboard/app/:name/comments"
-              component={Comments}
-            />
+            <Route exact path="/dashboard/app/:id" component={AppDashboard} />
           </div>
         </Router>
       </Provider>

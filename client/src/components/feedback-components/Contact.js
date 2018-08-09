@@ -3,6 +3,7 @@ import Complete from "./Complete";
 import PropTypes from "prop-types";
 
 const Contact = ({ walmartId, canContact, addContactInfo, complete }) => {
+  //when radio button is selected, update canContact to true or false
   const onInput = e => {
     if ((e.target.id = "feedback-comp-canContact")) {
       canContact = true;
@@ -14,7 +15,7 @@ const Contact = ({ walmartId, canContact, addContactInfo, complete }) => {
   const onSubmit = e => {
     //if submit button is pressed or user hits 'enter' key while in text input
     if (e.keyCode == null || e.keyCode === 13) {
-      addContactInfo(canContact);
+      addContactInfo(canContact); //add contact info
 
       //hide contact form and show feedback complete message
       setTimeout(function() {
@@ -26,11 +27,12 @@ const Contact = ({ walmartId, canContact, addContactInfo, complete }) => {
           .classList.remove("feedback-comp-hidden");
       }, 400);
 
+      //5 seconds after hitting sumbit, hide the feedback component
       setTimeout(function() {
         document
           .getElementById("feedback-component")
           .classList.remove("feedback-component-open");
-      }, 4000);
+      }, 5000);
     }
   };
 
